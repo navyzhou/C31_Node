@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加管理员信息</title>
+    <script type="text/javascript" src="jquery-1.11.3.js"></script>
+    <script>
+        function showAdminInfo(){
+            $.get("/getAllAdminInfo",null,function(data){
+                var str="";
+                $.each(data,function(index,item){
+                    str+="<tr><td>"+item.aid+"</td><td>"+item.aname+"</td><td>"+item.pwd+"</td>";
+                    str+="<td>"+item.age+"</td><td>"+item.addr+"</td><td>"+item.photo+"</td></tr>";
+                });
+                //console.info(data);
+                $("#adminInfo").append($(str));
+            },"json");
+        }
+
+    </script>
+</head>
+<body>
+    <form action="/adminRegister" method="post">
+        姓名:<input type="text" name="aname"/>
+        密码:<input type="password" name="pwd"/>
+        年龄:<input type="number" name="age"/>
+        地址:<input type="text" name="addr"/>
+        图片:<input type="text" name="photo"/>
+        <input type="submit" value="提交"/>
+    </form>
+
+    <a href="javascript:showAdminInfo()">显示所有管理员信息</a>
+    <table width="90%" border="1px" cellpadding="0px" cellspacing="0px" align="center">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>密码</th>
+                <th>年龄</th>
+                <th>地址</th>
+                <th>图片</th>
+            </tr>
+        </thead>
+        <tbody align="center" id="adminInfo">
+
+        </tbody>
+    </table>
+</body>
+</html>
