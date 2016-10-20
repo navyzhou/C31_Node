@@ -19,6 +19,7 @@ pool.getConnection(function(err,con){ //从连接池中获取一个连接，con�
                 console.info("查询数据失败...");
             }else{
                 console.info(rows);
+                pool.end(); //关闭连接池
             }
         });
     }
