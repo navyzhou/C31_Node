@@ -15,5 +15,6 @@ create table adminInfo(
     photo varchar(200)
 );
 
+
 --修改自增起始值
 alter table adminInfo auto_increment=1001;

@@ -3,13 +3,16 @@ var fs=require("fs");
 var mysql=require("mysql");
 var querystring=require("querystring");
 
-var connection=mysql.createConnection({
-    host:"127.0.0.1",
-    port:3306,
-    user:"root",
-    password:"aaaa",
-    database:"yc"
-});
+var connection;
+function getConnection() {
+    connection = mysql.createConnection({
+        host: "127.0.0.1",
+        port: 3306,
+        user: "root",
+        password: "aaaa",
+        database: "yc"
+    });
+}
 
 var server=http.createServer().listen(80,function(err){
    if(err){
@@ -28,11 +31,11 @@ server.on("request",function(req,resp){
         req.on("data",function(data){
             var obj=querystring.parse(data.toString());
             //将这个对象存到数据库
+            getConnection();
             connection.connect(function(err){ //连接数据库
                 if(err){
                     console.info(err);
                 }else{
-                    //connection.query("insert into adminInfo values(0,?,?,?,?,'')",[obj.aname,obj.pwd,obj.age,obj.addr],function(err,result){
                     connection.query("insert into adminInfo set ?",obj,function(err,result){
                         connection.end();
                         resp.writeHead(200,"OK",{"Content-Type":"text/html;charset=utf-8"});
@@ -47,6 +50,7 @@ server.on("request",function(req,resp){
             });
         });
    }else if(req.url=="/getAllAdminInfo"){ //查询所有
+       getConnection();
        connection.connect(function(err){ //连接数据库
            if(err){
                console.info(err);
