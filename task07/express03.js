@@ -13,3 +13,8 @@ app.listen(80,function(err){
         console.info("应用程序启动成功...");
     }
 });
+
+
+//npm install body-parser
+//npm install multer
+//npm install express-session
