@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>cookie</title>
+    <script type="text/javascript" src="jquery-1.11.3.js"></script>
+    <script type="text/javascript">
+        function userLogin(){
+            var uname= $.trim( $("#uname").val() );
+            $.post("/userLogin",{uname:uname},function(data){
+                data= $.trim(data);
+                if(data=="1"){
+                    location.href="session1.html";
+                }else{
+                    alert("出错啦...");
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="uname" />
+    <input type="button" value="登录" onclick="userLogin()" />
+</body>
+</html>
