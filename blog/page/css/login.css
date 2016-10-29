@@ -1,0 +1,198 @@
+/*购物车*/
+
+#loginDiv{
+	width:55em;
+	height:45em;
+	background-size: cover;
+	transition: 1s;
+	}	
+	#loginDiv input{
+		border:1px solid #ccc;
+	}
+	#off{
+		font-size:30px;
+		color: red;
+		width: 1em;
+		height: 1em;
+		text-align: center;
+		line-height: 1em;
+		position: absolute;
+		border-radius: 50%;
+		background: rgba(0,0,0,0.5);
+		top: 0.92em;
+		font-weight: bolder;
+		left:20em;
+		font-style: normal;
+		z-index: 4;
+	}
+	#off2{
+		opacity: 0;
+		z-index:-1;
+		font-size:30px;
+		color: red;
+		width: 1em;
+		height: 1em;
+		text-align: center;
+		line-height: 1em;
+		position: absolute;
+		border-radius: 50%;
+		background: rgba(0,0,0,0.5);
+		top: 0.92em;
+		font-weight: bolder;
+		left:17.2em;
+		font-style: normal;
+	}
+	#off,#off2:hover{
+		cursor:pointer ;
+	}
+	#logContent,.aa{
+		width:26em;
+		border-radius: 0.5em;
+		background:rgba(233,233,233,1);
+		/*border: 1px solid #AF6C42;*/
+		margin-top: 2em;
+		height:28em;
+		padding-top: 5em;
+		transition: 1s;
+		opacity: 1;
+		position: absolute;
+		left: 13em;
+		top: 0em;
+		box-shadow: 0px 0px 22px #000 ;
+		
+	}
+	 .h2{
+			color: #444444;
+			font-size: 22px;
+			text-align: center;
+			margin-bottom: 1em;
+		}
+	#logContent,#zhuContent p{
+		text-align: center;
+	}
+	
+	#uname,#pwd,#sub,#yzm{
+		text-align: center;
+		background: #eaeaea;
+		border-radius: 0.3em;
+		border: 0;
+		line-height: 2em;
+		margin-top: 1.3em;
+	}
+	#yzm{
+		line-height: 3em;
+		
+		width: 6em;
+		
+	}
+	#yzmImg{
+		height: 2em;
+	}
+	/*验证码*/
+	#yzmp{
+	}
+	#imgsrc{
+		font-size: 12px;
+	}
+	#mima{
+		color: red;
+		font-size: 16px;
+		line-height:3em;
+	}
+	#sub{
+		background:#6495ed;
+		color: #ebebeb;
+		font-weight: bold;
+		letter-spacing: 0.3em;
+		width: 8em;
+	}
+	#yzmImg{
+		
+	}
+	#sub,#yzmImg:hover{
+		cursor: pointer;
+	}
+	#reg{
+		margin: 0 auto;
+		width: 20em;
+		margin-top: 1em;
+	}
+	#reg p{
+		letter-spacing: 0.2em;
+		font-size: 18px;
+	}	
+	#ljzhuce{
+		padding: 1em;
+		font-size: 20px;
+		color: #cd3700;
+	}	
+	#ljzhuce:hover{
+		cursor: pointer;
+		color: #43cd80
+	}
+
+	#zhuContent{
+		width:26em;
+		border-radius: 0.5em;
+		background:rgba(233,233,233,1);
+		margin-top: 2em;
+		height:28em;
+		padding-top: 5em;
+		transition: 1s;
+		position: absolute;
+		left: 13em;
+		top: 0em;
+		transform-origin:100% 0 ;
+		transform: rotate3d(0,1,0,145deg);
+		opacity: 0;
+		z-index:-3 ;
+	}
+
+		#zcname,#zcpwd,#zc{
+			width: 14em;
+			text-align: center;
+			background: #eaeaea;
+			border-radius: 0.3em;
+			border: 0;
+			line-height: 2em;
+			margin-top: 1.3em;
+		}
+		#zc{
+			font-weight: bold;
+			letter-spacing: 0.3em;
+			line-height: 2em;
+			width: 8em;
+			
+		}
+		#fhdl{
+			width: 14em;
+			text-align: center;
+			background: #eaeaea;
+			border-radius: 0.3em;
+			border: 0;
+			line-height: 2em;
+			margin-top: 1.3em;
+		}
+		#zc:hover{
+			cursor: pointer;
+			background: #cd0000;
+			color: #eaeaea;
+	}
+		#yzpwd,#yzname{
+			margin-top: 0.5em;
+			line-height: 2em;
+			font-size: 12px;
+			color: green;
+		}
+		#fhdl:hover{
+			cursor: pointer;
+			background: #cd0000;
+			color: #eaeaea;
+		}
+
+
+
+
+
+
+

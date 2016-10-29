@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户注册</title>
+<link type="image/icon" rel="shortcut icon" href="images/yc.png"/>
+<script type="text/javascript" src="js/showPic.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<script>
+    function userRegister(){
+        var uname= $.trim( $("#uname").val() );
+        var pwd= $.trim( $("#pwd").val() );
+        var email= $.trim( $("#email").val() );
+        var code= $.trim( $("#code").val() );
+
+        $.ajaxFileUpload({
+            url:"/userRegister",
+            secureuri:false,
+            fileElementId:"photo",
+            dataType:"json",
+            data:{uname:uname,pwd:pwd,email:email,code:code},
+            success:function(data, status){
+                data= $.trim( data );
+                if(data=="1"){
+                    alert("数据库连接失败...");
+                }else if(data=="2") {
+                    alert("数据添加失败...");
+                }else if(data=="3") {
+                    location.href = "index.html";
+                }else if(data=="4"){
+                    alert("校验码错误...");
+                }else{
+                    alert("注册失败...");
+                }
+            },
+            error:function(){
+                alert("出错啦...");
+            }
+        });
+    }
+
+    function sendCode(){
+        var email= $.trim( $("#email").val() );
+        if(email==""){
+            return;
+        }else {
+            $.post("/sendCode", {email:email},function (data) {
+                data = $.trim(data);
+                if (data == "1") {
+                    $("#btncode").attr("disabled", true).val("发送成功");
+                } else {
+                    $("#btncode").attr("disabled", false).val("发送失败");
+                }
+            });
+        }
+    }
+</script>
+</head>
+<body>
+<form>
+    昵称：<input type="text" name="uname" id="uname" /><br />
+    密码：<input type="password" name="pwd" id="pwd" /><br />
+    邮箱：<input type="email" name="email" id="email" /><br />
+    校验码：<input type="text" name="code" id="code" /><input id="btncode" type="button" value="获取校验码" onclick="sendCode()"><br />
+    图像：<input type="file" name="photo" id="photo" onchange="setImagePreviews(this,'showPhoto')" /><br />
+    <input type="button" value="注册" onclick="userRegister()"/><br />
+</form>
+<div id="showPhoto">
+
+</div>
+</body>
+</html>
