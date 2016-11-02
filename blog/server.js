@@ -220,7 +220,7 @@ app.get("/getAllArticle",function(req,res){
             logger.error(err.message.toString());
             res.send('{"error":"1"}'); //说明数据库连接失败...
         }else {
-            con.query("select * from article a,userInfo u,typeInfo t where a.usid=u.usid and a.tid=t.tid",function(err,result){
+            con.query("select a.aid,a.title,a.content,a.views,u.uname,u.photo,t.tname from article a,userInfo u,typeInfo t where a.usid=u.usid and a.tid=t.tid",function(err,result){
                 if(err){
                     logger.error(err.message.toString());
                     res.send('{"error":"2"}')

@@ -64,6 +64,20 @@
 			height:188px !important;
 			overflow: hidden;
 		}
+
+		#showmore{
+			line-height:40px;
+			background-color: #dff0d8;
+			border-color: #d6e9c6;
+			color: #3c763d;
+			font-size: 16px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		#showmore:hover{
+			color:rgb(234, 56, 56);
+		}
 	</style>
 </head>
 <body>
@@ -153,7 +167,7 @@
 			</div>
 		</div>-->
 	</div>
-
+	<p id="showmore">点击加载更多</p>
 	<div id="userLogin">
 		用户名：<input type="text" name="uname" id="index_uname" /> <br/><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;密码：<input type="password" name="pwd" id="index_pwd" /> <br/><br/>
@@ -224,7 +238,7 @@
 				$.each(data,function(index,item){
 					str+='<div class="row"><div class="col-md-3 col-sm-5 col-xs-6"><div class="panel panel-default"><div class="panel-body"><div class="thumbnail">';
 					str+='<img src="'+item.photo+'" alt=""></div><div class="caption"><h3><center>'+item.uname+'</center></h3><h6><center>学习是一种享受</center></h6></div> </div></div></div>';
-					str+='<div class="col-md-9 col-sm-7 col-xs-6"><div class="panel panel-success"><div class="panel-heading"><h4><a href="show.html#'+item.aid+'" target="_blank">'+item.title+'</a>';
+					str+='<div class="col-md-9 col-sm-7 col-xs-6"><div class="panel panel-success"><div class="panel-heading"><h4><a href="show.html#'+item.aid+'" target="_blank">['+item.tname+'] '+item.title+'</a>';
 					str+='</h4></div><div class="panel-body"><div class="content_a"> <h5 class="C_ contentheight">'+item.content+'</h5></div></div>';
 					str+='<div class="btnAll"><ul class="nav nav_a"><li><a href=""><span class="badge badge_a">'+item.views+'</span>&nbsp;浏览次数</a></li>';
 					str+='<li><a href=""><span class="badge badge_a">4</span>&nbsp;推荐</a></li>';
