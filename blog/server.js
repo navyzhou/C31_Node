@@ -9,7 +9,6 @@ var log4js=require("log4js"); //日志的
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport('smtps://1293580602@qq.com:dihpepdwtahlgefh@smtp.qq.com');
-
 var app=express(); //创建一个应用程序
 //启用bodyParser中间件
 app.use(bodyParser.urlencoded({extended:false}));
@@ -154,6 +153,90 @@ app.get("/checkUserLogin",function(req,res){
    }
 });
 
+//获取所有的文章类型信息
+app.get("/getAllTypeInfo",function(req,res){
+    pool.getConnection(function(err,con){
+        if(err){
+            logger.error(err.message.toString());
+            res.send('{"error":"1"}');
+        }else{
+            con.query("select * from typeInfo where status=1",function(err,result){
+                if(err){
+                    logger.error(err.message.toString());
+                    res.send('{"error":"2"}');
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    }) ;
+});
+
+//发表博客文章
+app.post("/addBlog",upload.array("pic"),function(req,res){
+    var obj=req.body;
+    if(obj.title=="" || obj.content==""){
+        res.send("0"); //信息不完整
+    }else if(req.session.currentLoginUser==undefined){
+        res.send("1"); //没有登录
+    }else{
+        var picstr = "";
+        if(req.files!=undefined) {
+            var file;
+            var fileName;
+            for (var i in req.files) {
+                file = req.files[i];
+                fileName = new Date().getTime() + "_" + file.originalname; //生成一个新的文件名
+                fs.renameSync(file.path, __dirname + "/page/file/" + fileName);
+                if (picstr != "") {
+                    picstr += ",";
+                }
+                picstr += "file/" + fileName;
+            }
+        }
+        //将这些数据存到数据库
+        pool.getConnection(function(err,con){
+            if(err){
+                logger.error(err.message.toString());
+                res.send("2"); //说明数据库连接失败...
+            }else{
+                con.query("insert into article values(0,?,?,?,?,now(),?,0)",[obj.tid,req.session.currentLoginUser.usid,obj.title,obj.content,picstr],function(err,result){
+                    if(err){
+                        logger.error(err.message.toString());
+                        res.send("2"); //说明添加有误...
+                    }else{
+                        res.send("3");
+                    }
+                });
+            }
+        });
+    }
+});
+
+//查询所有文章信息
+app.get("/getAllArticle",function(req,res){
+    pool.getConnection(function(err,con){
+        if(err){
+            logger.error(err.message.toString());
+            res.send('{"error":"1"}'); //说明数据库连接失败...
+        }else {
+            con.query("select * from article a,userInfo u,typeInfo t where a.usid=u.usid and a.tid=t.tid",function(err,result){
+                if(err){
+                    logger.error(err.message.toString());
+                    res.send('{"error":"2"}')
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+
+//用户注销
+app.get("/userLoginOut",function(req,res){
+    req.session.currentLoginUser==undefined;
+    res.send("0");
+});
 
 //启用静态模块
 app.use(express.static("page"));

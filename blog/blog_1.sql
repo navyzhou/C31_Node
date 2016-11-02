@@ -57,3 +57,5 @@ create table comment(
     constraint FK_comment_aid foreign key(aid) references article(aid),
     constraint FK_comment_usid foreign key(usid) references userInfo(usid)
 );
+
+select * from article a,userInfo u,typeInfo t where a.usid=u.usid and a.tid=t.tid
