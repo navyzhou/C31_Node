@@ -117,9 +117,9 @@ app.post("/userRegister",upload.single("photo"),function(req,res){
 //处理用户登录
 app.post("/userLogin",function(req,res){
     var obj=req.body;
-   if(obj.uname=="" || obj.pwd==""){
+    if(obj.uname=="" || obj.pwd==""){
        res.send('{"error":"0"}');
-   }else{
+    }else{
        pool.getConnection(function(err,con){
           if(err){
               logger.error(err.message.toString());
@@ -141,7 +141,7 @@ app.post("/userLogin",function(req,res){
               });
           }
        });
-   }
+    }
 });
 
 //判断用户是否已经等
@@ -252,6 +252,39 @@ app.post("/getArticleByPage",function(req,res){
             });
         }
     });
+});
+
+//根据文章id查询文章的详细信息
+app.post("/findArticleByAid",function(req,res){
+    var aid=req.body.aid;
+    if(aid==""){
+        res.send('{"error":"0"}');
+    }else{
+        pool.getConnection(function(err,con){
+            if(err){
+                logger.error(err.message.toString());
+                res.send('{"error":"1"}');
+            }else{
+                //浏览器次数加1
+                con.query("update article set views=views+1 where aid=?",[aid],function(err,result){
+                    con.query("select a.aid,a.title,a.content,a.pic,a.views,date_format(a.adate,'%Y-%m-%d %H:%i:%S') as adate,u.usid,u.uname,u.photo,t.tid,t.tname " +
+                        " from article a,userInfo u,typeInfo t where a.usid=u.usid and a.tid=t.tid and a.aid=?",[aid],function(err,result){
+                        if(err) {
+                            logger.error(err.message.toString());
+                            res.send('{"error":"2"}');
+                        }else{
+                            if(result.length==0){//说明没有查到数据
+                                res.send('{"error":"3"}');
+                            }else{
+                                //将当前登录用户信息存到session中
+                                res.send(result[0]);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    }
 });
 
 //用户注销

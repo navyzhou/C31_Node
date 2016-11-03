@@ -3,21 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <title>YC论坛</title>
+<meta http-equiv="X-UA-Compatiable" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <link type="image/icon" rel="shortcut icon" href="images/yc.png"/>
 <link rel="stylesheet" type="text/css" href="css/basic.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/banse.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var aid=location.hash.replace("#","");
+        $.post("/findArticleByAid",{aid:aid},function(data){
+            $("#currentUser").text(data.uname);
+            $("#currentUserPhoto").attr("src",data.photo);
+            $("#article_title").text(data.title);
+            $("#article_content").html(data.content);
+            $("#article_author").html(data.uname);
+            $("#article_adate").html(data.adate);
+            $("#article_views").html(data.views);
+
+            var pics=data.pic;
+            console.info(pics);
+            if(pics!=""){
+                if(pics.indexOf(",")>0){
+                    pics=pics.split(",");
+                    var str1="";
+                    var str2="";
+                    var str3="";
+                    for(var i=0;i<pics.length;i++){
+                        if(i==0){
+                            str1+="<li style='display:block;'><img src='"+pics[i]+"'/></li>";
+                            str3+="<li><img  class='navy_over' src='"+pics[i]+"'/></li>";
+                        }else{
+                            str1+="<li><img src='"+pics[i]+"'/></li>";
+                            str3+="<li><img src='"+pics[i]+"'/></li>";
+                        }
+                        str2+="<li><p>"+data.title+"</p></li>";
+                    }
+
+                    $("#navy_show_img").append($(str1));
+                    $("#navy_show_title>ul:eq(0)").append($(str2));
+                    $("#navy_show_imgsmall").append($(str3));
+
+                    $("#navy_show_img_div").css("display","block");
+                    showPicCycle();
+                }else{
+                    $("#navy_show_img_div").css("display","block").html("<img src='"+pics+"'/>");
+                }
+
+            }
+        },"json");
+    });
+</script>
 </head>
 <body>
-<header>
-    <img src="images/logo.png" height="100px"/>
-    <div id="index_user_info">
-        <img src="images/user.png" />
-        <p><a href="javascript:userLogin()">[登录]</a><a href="javascript:userRegister()">[注册]</a></p>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand fontLogo" href="#"><img src="images/logo.png" height="50px"/></a>
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JAVASCRIPT</a></li>
+        </ul>
+        <form action="" class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <button type="submit" class="btn btn-default">Search</button>
+            </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><img src="images/user.png" id="userLoginPhoto" class="userP" /></a></li>
+            <li><a href="javascript:showUserLoginDiv()" id="currentloginUser">&nbsp;Login</a></li>
+            <li id="addBlog"></li>
+            <li><a href="reg.html">Reg</a></li>
+        </ul>
     </div>
-</header>
+</nav>
 
-<article>
+<div class="row" style="margin:100px 20px 20px 20px">
+    <div class="col-md-3 col-sm-5 col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="thumbnail">
+                    <img src="images/user.png" alt="" id="currentUserPhoto">
+                </div>
+                <div class="caption">
+                    <h3 class="textcenter" id="currentUser"></h3>
+                    <h6 class="textcenter">学习是一种享受</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-sm-7 col-xs-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="textcenter" id="article_title"></h3>
+            </div>
+            <div class="panel-body">
+                <div class="content_a">
+                    <div class="navy_show_img_div" id="navy_show_img_div">
+                        <ul id="navy_show_img">
 
-</article>
+                        </ul>
+                        <div id="navy_show_title">
+                            <ul>
+
+                            </ul>
+                        </div>
+                        <div id="navy_show_divsmall">
+                            <span id="navy_left"></span>
+                            <div id="navy_show_imgsmall_view">
+                                <ul id="navy_show_imgsmall">
+
+                                </ul>
+                            </div>
+                            <span id="navy_right"></span>
+                        </div>
+                    </div>
+                    <h5 class="C_" id="article_content">
+                    </h5>
+                </div>
+            </div>
+            <div class="btnAll">
+                <ul class="nav nav_a">
+                    <li><a><span class="badge badge_a">作者：</span>&nbsp;<span id="article_author"></span></a></li>
+                    <li><a><span class="badge badge_a">发布日期：</span>&nbsp;<span id="article_adate"></span></a></li>
+                    <li><a><span class="badge badge_b">浏览数：</span>&nbsp;<span id="article_views"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer>
     <p><a href="http://www.hyycinfo.com">源辰信息科技有限公司</a> &copy; 版权所有  TEL：0734-8355998 </p>
 </footer>

@@ -24,30 +24,11 @@ a:hover{
 	text-decoration:underline;
 }
 
-header{
-	height:100px;
-	width:100%;
-	background:#09C;
-	position:fixed;
-	left:0px;
-	top:0px;
-	font-size:18px;
-}
 
 #index_user_info{
 	float:right;
 	margin-right:5%;
 	position:relative;
-}
-
-#index_user_info>img{
-	border-radius:50%;
-}
-
-#index_user_info>p{
-	float:right;
-	line-height:100px;
-	margin-left:20px;
 }
 
 footer{
@@ -69,4 +50,8 @@ footer>p>a,header a{
 footer>p{
 	text-align:center;
 	line-height:50px;
+}
+
+.textcenter{
+	text-align: center;
 }

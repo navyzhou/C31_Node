@@ -1,90 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatiable" content="IE=edge">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/banse.css">
-	<title>YC论坛</title>
-	<style type="text/css">
-		.main{
-			margin-top:61px; 
-		}
-		.thumbnail img{
-			width: 100%;
-			height: 100%;
-		}
-		.C_T{
-			text-align: center;
-		}
-		.C_{
-			text-indent: 24px;
-		}
-		.content_a{
-			border-top: 1px solid #e7e7e7;
-			border-bottom: 1px solid #e7e7e7;
-		}
-		.nav_a{
-			text-align: right;
-		}
-		.nav_a li{
-			display: inline-block;
-		}
-		
-		.badge_a{
-			background-color:rgb(90, 191, 62); 
-		}
-		.badge_b{
-			background-color:rgb(234, 56, 56); 
-		}
-		.badge_b:hover{
-			background-color: red;
-		}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatiable" content="IE=edge">
+<link type="image/icon" rel="shortcut icon" href="images/yc.png"/>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/banse.css">
+<title>YC论坛</title>
+<style type="text/css">
+	#userLogin{
+		background:#ccc;
+		border:1px solid #666;
+		width:260px;
+		height:140px;
+		position: absolute;
+		z-index:100;
+		display: none;
+		top:50%;
+		left:50%;
+		-webkit-transform:translate(-50%,-50%);
+		-moz-transform:translate(-50%,-50%);
+		transform:translate(-50%,-50%);
+		padding-left:10px;
+		padding-top:10px;
+	}
 
-		#userLogin{
-			background:#ccc;
-			border:1px solid #666;
-			width:260px;
-			height:140px;
-			position: absolute;
-			z-index:100;
-			display: none;
-			top:50%;
-			left:50%;
-			-webkit-transform:translate(-50%,-50%);
-			-moz-transform:translate(-50%,-50%);
-			transform:translate(-50%,-50%);
-			padding-left:10px;
-			padding-top:10px;
-		}
+	.contentheight{
+		height:188px !important;
+		overflow: hidden;
+	}
 
+	#showmore{
+		line-height:40px;
+		background-color: #dff0d8;
+		border-color: #d6e9c6;
+		color: #3c763d;
+		font-size: 16px;
+		text-align: center;
+		cursor: pointer;
+	}
 
-		.contentheight{
-			height:188px !important;
-			overflow: hidden;
-		}
-
-		#showmore{
-			line-height:40px;
-			background-color: #dff0d8;
-			border-color: #d6e9c6;
-			color: #3c763d;
-			font-size: 16px;
-			text-align: center;
-			cursor: pointer;
-		}
-
-		#showmore:hover{
-			color:rgb(234, 56, 56);
-		}
-	</style>
+	#showmore:hover{
+		color:rgb(234, 56, 56);
+	}
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header"> 
-	            <a class="navbar-brand fontLogo" href="#">Y&nbsp;C</a> 
+	            <a class="navbar-brand fontLogo" href="#"><img src="images/logo.png" height="50px"/></a>
 	        </div>
 	        <ul class="nav navbar-nav navbar-left">
 	        	<li><a href="#">HTML</a></li>

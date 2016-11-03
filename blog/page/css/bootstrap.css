@@ -4610,7 +4610,7 @@ a.label:focus {
 .badge {
   display: inline-block;
   min-width: 10px;
-  padding: 3px 7px;
+  padding: 5px 7px;
   font-size: 12px;
   font-weight: bold;
   line-height: 1;
@@ -6356,3 +6356,36 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+.C_T{
+  text-align: center;
+}
+.C_{
+  text-indent: 24px;
+}
+.content_a{
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+}
+.nav_a{
+  text-align: right;
+}
+.nav_a li{
+  display: inline-block;
+}
+
+.badge_a{
+  background-color:rgb(90, 191, 62);
+}
+.badge_b{
+  background-color:rgb(234, 56, 56);
+}
+.badge_b:hover{
+  background-color: red;
+}
+.thumbnail img{
+  width: 100%;
+  height: 100%;
+}
+.main{
+  margin-top:61px;
+}
