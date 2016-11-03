@@ -232,6 +232,28 @@ app.get("/getAllArticle",function(req,res){
     });
 });
 
+//分页查询文章信息
+app.post("/getArticleByPage",function(req,res){
+    var pageNo=req.body.pageNo;
+    var pageSize=req.body.pageSize;
+    pool.getConnection(function(err,con){
+        if(err){
+            logger.error(err.message.toString());
+            res.send('{"error":"1"}'); //说明数据库连接失败...
+        }else {  //0 2   2  2  4 2
+            con.query("select a.aid,a.title,a.content,a.views,u.uname,u.photo,t.tname from article a,userInfo u,typeInfo t " +
+                " where a.usid=u.usid and a.tid=t.tid order by aid limit "+(pageNo-1)*pageSize+","+pageSize,function(err,result){
+                if(err){
+                    logger.error(err.message.toString());
+                    res.send('{"error":"2"}')
+                }else{
+                    res.send(result);
+                }
+            });
+        }
+    });
+});
+
 //用户注销
 app.get("/userLoginOut",function(req,res){
     req.session.currentLoginUser==undefined;
